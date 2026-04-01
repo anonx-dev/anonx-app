@@ -1,0 +1,61 @@
+# AnonX App - UI/UX Implementation Plan
+
+This plan outlines the roadmap for building the `anonx-app` (the mobile LMS for solo educators) utilizing **Next.js**, **Tailwind CSS**, and **Capacitor**. The core focus of these initial sprints is to establish a **True Native Feel** while building a flexible **White-Label** foundation that allows for easy resale and branding tweaks.
+
+## User Review Required
+
+> [!IMPORTANT]
+> Please review the Sprint breakdown below. I have focused heavily on getting the mobile UX right before we even connect to a real database. We need to ensure navigating the app *feels* like a native Android/iOS app.
+> Do you agree with this order of execution? 
+
+## Technical Foundation
+
+- **Framework**: Next.js 15 (App Router) initialized inside the existing `anonx-app` directory.
+- **Styling**: Tailwind CSS v4 (matching your MVP setup) + Custom CSS Variables for theming.
+- **Animations**: Framer Motion (crucial for mobile-like swiping and page transitions).
+- **Mobile Packaging**: Capacitor (to wrap the Next.js export into an Android AAB/APK).
+- **Icons**: Lucide React.
+
+## Proposed Sprints (UI/UX Focus)
+
+### Sprint 1: Foundation & "Native Feel" Setup
+*The layout and foundational rules so the web app feels like native software.*
+1. **Initialize Next.js in `anonx-app`**: Clean up the default template and install Capacitor.
+2. **Mobile UX Resets via CSS**: 
+   - Disable text selection (`user-select: none`).
+   - Remove annoying blue tap highlights on mobile (`-webkit-tap-highlight-color: transparent`).
+   - Hide all web scrollbars.
+   - Configure global safe-area-insets to avoid rendering behind the phone's notch or gesture bar.
+3. **White-Label Theme Engine**: Create a `ThemeProvider` that injects CSS variables (e.g., `--primary-color`, `--font-family`) globally so we can instantly change the look of the app for different educators.
+
+### Sprint 2: Core Shell & Navigation
+*Building the skeleton of the app that the user navigates through.*
+1. **The Native Layout Wrapper**: A parent layout that locks scrolling to specific child areas, keeping the bottom navigation fixed.
+2. **Bottom Navigation Bar**: A standard mobile-friendly bottom tab bar (e.g., *Home, My Courses, Profile*).
+3. **Mobile Header & App Bar**: A dynamically changing top header with a "Back" button.
+4. **Page Transitions**: Use Framer Motion to make pages "slide in" from the right when pushed, and "slide out" when the back button is pressed, mimicking iOS/Android native navigation.
+
+### Sprint 3: The LMS Experience
+*Building the actual screens an offline/online student will use.*
+1. **Home / Dashboard Screen**: 
+   - "Continue Watching" card.
+   - Horizontal scrolling carousels for recommended/new courses.
+2. **Course Detail Screen**:
+   - Sticky Video Player (stays at the top while scrolling the syllabus).
+   - Expandable Lesson Accordions.
+3. **Micro-interactions**: Adding subtle scale-down effects when clicking buttons to make them feel tactile.
+
+## Open Questions
+
+> [!CAUTION]  
+> 1. **Do we need to support Offline Video Downloads in the future?** Web PWAs can cache video, but it has storage limits. Knowing this now helps us structure the Capacitor plugins.
+> 2. **Should we use dummy data for the UI/UX sprints?** I recommend building the entire visual app with hardcoded "mock" data first so we can perfect the animations before wiring up the real APIs. Is that okay with you?
+
+## Verification Plan
+
+### Automated/Local Testing
+- We will test the responsive design using Chrome DevTools (Mobile View).
+- We will ensure no horizontal scrolling exists.
+
+### Manual Verification
+- We will build the app to an actual Android APK via Capacitor to test tactile feel, swiping behavior, and notch support on a physical device.

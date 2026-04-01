@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
+/* ===========================
+   WHITE-LABEL DESIGN TOKENS
+   =========================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand - overridden per educator by ThemeProvider */
+  --primary: #6C63FF;
+  --primary-foreground: #ffffff;
+  --primary-muted: rgba(108, 99, 255, 0.12);
+
+  /* Backgrounds */
+  --bg-base:     #F4F4F6;
+  --bg-surface:  #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-card:     #F8F8FA;
+
+  /* Foregrounds */
+  --fg-primary:   #0D0D0F;
+  --fg-secondary: #4B4B5C;
+  --muted:        #78788A;
+
+  /* Borders */
+  --border-color: rgba(0, 0, 0, 0.06);
+
+  /* Status */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error:   #EF4444;
+
+  /* Tailwind compat */
+  --background: var(--bg-base);
+  --foreground: var(--fg-primary);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===========================
+   GLOBAL RESETS
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--fg-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Mobile native feel */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  /* Prevents rubber-band scroll on iOS */
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#__next, main {
+  height: 100%;
+}
+
+/* ===========================
+   SCROLLABLE AREA (inner content only)
+   =========================== */
+.scroll-area {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  height: 100%;
+}
+
+/* ===========================
+   HIDE SCROLLBAR 
+   =========================== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===========================
+   SAFE AREAS (Notch / Gesture Bar)
+   =========================== */
+.pt-safe { padding-top: env(safe-area-inset-top); }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pl-safe { padding-left: env(safe-area-inset-left); }
+.pr-safe { padding-right: env(safe-area-inset-right); }
+
+/* ===========================
+   TAPABLE BUTTONS — native feel
+   =========================== */
+.btn-tap {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  cursor: pointer;
+}
+.btn-tap:active {
+  transform: scale(0.93);
+  opacity: 0.8;
+}
+
+/* ===========================
+   GLASSMORPHISM CARD
+   =========================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+/* ===========================
+   SHIMMER SKELETON LOADER
+   =========================== */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-card) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+
+/* ===========================
+   GRADIENT TEXT
+   =========================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===========================
+   PROGRESS BAR
+   =========================== */
+.progress-bar {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary), #a78bfa);
+  transition: width 0.5s ease;
 }
