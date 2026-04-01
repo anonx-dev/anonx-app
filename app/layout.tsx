@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { APP_CONFIG } from "@/app.config";
+
+import { AppInitializer } from "@/components/app-initializer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "AnonX Learn",
+  title: APP_CONFIG.appName,
   description: "Your personal learning companion — anytime, anywhere.",
   viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
   themeColor: "#FFFFFF",
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "AnonX Learn",
+    title: APP_CONFIG.appName,
   },
 };
 
@@ -32,6 +35,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} no-scrollbar`}>
         <ThemeProvider>
+          <AppInitializer />
           {children}
         </ThemeProvider>
       </body>

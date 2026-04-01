@@ -17,8 +17,8 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around bg-[var(--bg-surface)] border-t border-[var(--border-color)] pb-safe"
-      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 8px)" }}
+      className="fixed bottom-0 left-0 right-0 z-50 flex items-start justify-around bg-white/90 backdrop-blur-lg border-t border-[var(--border-color)] pt-2"
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 16px)" }}
     >
       {navItems.map(({ href, label, icon: Icon }) => {
         const isActive = pathname === href;
@@ -26,22 +26,19 @@ export function BottomNav() {
           <Link
             key={href}
             href={href}
-            className="relative flex flex-col items-center gap-1 px-5 py-2 min-w-[60px]"
+            className="relative flex flex-col items-center justify-center gap-1.5 px-5 py-2.5 min-w-[60px] active:scale-95 transition-transform"
           >
-            {isActive && (
-              <motion.div
-                layoutId="bottom-nav-indicator"
-                className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-[var(--primary)]"
-                transition={{ type: "spring", stiffness: 500, damping: 40 }}
-              />
-            )}
             <Icon
-              size={22}
+              size={24}
               className="transition-colors"
-              style={{ color: isActive ? "var(--primary)" : "var(--muted)" }}
+              strokeWidth={isActive ? 2.5 : 2}
+              style={{ 
+                color: isActive ? "var(--primary)" : "var(--muted)",
+                fill: isActive ? "var(--primary)" : "none"
+              }}
             />
             <span
-              className="text-[10px] font-medium tracking-wide transition-colors"
+              className="text-[10px] font-semibold tracking-wide transition-colors"
               style={{ color: isActive ? "var(--primary)" : "var(--muted)" }}
             >
               {label}

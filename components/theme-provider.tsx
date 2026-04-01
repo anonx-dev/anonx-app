@@ -2,14 +2,16 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
+import { APP_CONFIG } from "@/app.config";
+
 export type ThemeConfig = {
   primaryColor: string;
   primaryForeground: string;
 };
 
 const defaultTheme: ThemeConfig = {
-  primaryColor: "#F9308B", // Example vibrant pink
-  primaryForeground: "#ffffff",
+  primaryColor: APP_CONFIG.theme.primaryColor,
+  primaryForeground: APP_CONFIG.theme.primaryForeground,
 };
 
 const ThemeContext = createContext<{

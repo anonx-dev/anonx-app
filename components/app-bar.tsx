@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, Bell } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { APP_CONFIG } from "@/app.config";
+
 interface AppBarProps {
   title?: string;
   showBack?: boolean;
@@ -28,42 +30,23 @@ export function AppBar({
         paddingTop: "max(env(safe-area-inset-top), 0px)",
       }}
     >
-      {/* Left */}
-      <div className="flex items-center gap-2">
-        {showBack ? (
+      {/* Left / Title area */}
+      <div className="flex items-center gap-3">
+        {showBack && (
           <motion.button
             whileTap={{ scale: 0.85 }}
             onClick={() => router.back()}
-            className="flex items-center justify-center w-9 h-9 rounded-full"
+            className="flex items-center justify-center w-9 h-9 rounded-full -ml-1.5"
             style={{ background: "var(--bg-elevated)" }}
             aria-label="Go back"
           >
-            <ChevronLeft size={20} style={{ color: "var(--fg-primary)" }} />
+            <ChevronLeft size={22} style={{ color: "var(--fg-primary)" }} />
           </motion.button>
-        ) : (
-          <div className="flex items-center gap-1.5">
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-              style={{ background: "var(--primary)" }}
-            >
-              A
-            </div>
-            <span className="text-sm font-bold" style={{ color: "var(--fg-primary)" }}>
-              AnonX
-            </span>
-          </div>
         )}
+        <h1 className="text-[22px] font-bold tracking-tight leading-none" style={{ color: "var(--fg-primary)" }}>
+          {title || APP_CONFIG.appName}
+        </h1>
       </div>
-
-      {/* Title */}
-      {title && (
-        <span
-          className="absolute left-1/2 -translate-x-1/2 text-base font-semibold"
-          style={{ color: "var(--fg-primary)" }}
-        >
-          {title}
-        </span>
-      )}
 
       {/* Right */}
       <div className="flex items-center">

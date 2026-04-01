@@ -59,19 +59,7 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        {/* White Label Test Toggle */}
-        <section className="mb-2">
-          <h3 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2 ml-2">White Label Demo</h3>
-          <div className="glass-card overflow-hidden">
-            <div className="p-4 bg-[var(--bg-elevated)] flex gap-4 items-center overflow-x-auto no-scrollbar">
-              <span className="text-sm font-medium shrink-0">Theme:</span>
-              <button onClick={() => setConfig({...config, primaryColor: "#F9308B"})} className="w-8 h-8 rounded-full bg-[#F9308B] shrink-0 border-2 border-transparent focus:border-white"></button>
-              <button onClick={() => setConfig({...config, primaryColor: "#6C63FF"})} className="w-8 h-8 rounded-full bg-[#6C63FF] shrink-0 border-2 border-transparent focus:border-white"></button>
-              <button onClick={() => setConfig({...config, primaryColor: "#10B981"})} className="w-8 h-8 rounded-full bg-[#10B981] shrink-0 border-2 border-transparent focus:border-white"></button>
-              <button onClick={() => setConfig({...config, primaryColor: "#F59E0B"})} className="w-8 h-8 rounded-full bg-[#F59E0B] shrink-0 border-2 border-transparent focus:border-white"></button>
-            </div>
-          </div>
-        </section>
+
 
         {/* Settings List */}
         <section>

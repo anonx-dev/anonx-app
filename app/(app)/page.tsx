@@ -85,13 +85,13 @@ export default function Home() {
         </section>
 
         {/* Recommended Courses */}
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-3">
+        <section className="mb-8 -mx-4">
+          <div className="flex items-center justify-between mb-3 px-4">
             <h2 className="text-lg font-semibold">Recommended for you</h2>
             <button className="text-xs font-semibold text-[var(--primary)]">See all</button>
           </div>
           
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 snap-x">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 px-4 snap-x snap-mandatory">
             {RECOMMENDED_COURSES.map((course) => (
               <div key={course.id} className="snap-start shrink-0 w-[240px] flex flex-col gap-2 btn-tap">
                 <div className="relative w-full h-[135px] rounded-xl overflow-hidden bg-[var(--bg-elevated)]">
@@ -101,7 +101,7 @@ export default function Home() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/70 backdrop-blur text-[10px] font-medium flex items-center gap-1">
+                  <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/70 backdrop-blur text-[10px] font-medium flex items-center gap-1 text-white">
                     <Clock size={10} /> {course.duration}
                   </div>
                 </div>
@@ -115,6 +115,8 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            {/* Spacer for proper right margin on scroll */}
+            <div className="w-1 shrink-0 snap-end" />
           </div>
         </section>
       </main>
